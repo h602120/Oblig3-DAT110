@@ -176,6 +176,7 @@ public class MainWindow extends JFrame implements PropertyChangeListener {
 					peerprotocol.leaveRing();
 				} catch (RemoteException e1) {
 					// TODO Auto-generated catch block
+
 					e1.printStackTrace();
 				}				
 			}
@@ -190,6 +191,7 @@ public class MainWindow extends JFrame implements PropertyChangeListener {
 			public void actionPerformed(ActionEvent e) {
 				
 				// call the ip/port form
+
 				
 			}
 			

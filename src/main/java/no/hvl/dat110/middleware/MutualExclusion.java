@@ -52,31 +52,21 @@ public class MutualExclusion {
 	public boolean doMutexRequest(Message message, byte[] updates) throws RemoteException {
 		
 		logger.info(node.nodename + " wants to access CS");
+		//TODO: //implement the mutex request algorithm
 		// clear the queueack before requesting for votes
-		
 		// clear the mutexqueue
-		
 		// increment clock
-		
 		// adjust the clock on the message, by calling the setClock on the message
-				
 		// wants to access resource - set the appropriate lock variable
-	
-		
-		// start MutualExclusion algorithm
-		
-		// first, call removeDuplicatePeersBeforeVoting. A peer can hold/contain 2 replicas of a file. This peer will appear twice
 
+
+		// start MutualExclusion algorithm
+		// first, call removeDuplicatePeersBeforeVoting. A peer can hold/contain 2 replicas of a file. This peer will appear twice
 		// multicast the message to activenodes (hint: use multicastMessage)
-		
 		// check that all replicas have replied (permission)
-		
 		// if yes, acquireLock
-		
 		// node.broadcastUpdatetoPeers
-		
 		// clear the mutexqueue
-		
 		// return permission
 		
 		return false;

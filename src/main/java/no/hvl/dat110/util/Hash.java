@@ -8,6 +8,7 @@ package no.hvl.dat110.util;
 
 import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -18,30 +19,41 @@ public class Hash {
 		
 		BigInteger hashint = null;
 		
-		// Task: Hash a given string using MD5 and return the result as a BigInteger.
-		
-		// we use MD5 with 128 bits digest
-		
-		// compute the hash of the input 'entity'
-		
-		// convert the hash into hex format
-		
-		// convert the hex into BigInteger
-		
-		// return the BigInteger
-		
+		/*
+		Task: Hash a given string using MD5 and return the result as a BigInteger.
+		we use MD5 with 128 bits digest
+		compute the hash of the input 'entity'
+		convert the hash into hex format
+		convert the hex into BigInteger
+		return the BigInteger
+		 */
+//		Task: Hash a given string using MD5 and return the result as a BigInteger
+		try {
+			MessageDigest md = MessageDigest.getInstance("MD5");
+			byte[] digest = md.digest(entity.getBytes(StandardCharsets.UTF_8));
+			String hex = toHex(digest);
+			hashint = new BigInteger(hex, 16);
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}
+
 		return hashint;
 	}
 	
 	public static BigInteger addressSize() {
 		
 		// Task: compute the address size of MD5
-		
 		// compute the number of bits = bitSize()
-		
 		// compute the address size = 2 ^ number of bits
-		
 		// return the address size
+		try {
+			MessageDigest md = MessageDigest.getInstance("MD5");
+			int digestlen = md.getDigestLength();
+			return BigInteger.valueOf(2).pow(digestlen*8);
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}
+
 		
 		return null;
 	}
@@ -51,8 +63,14 @@ public class Hash {
 		int digestlen = 0;
 		
 		// find the digest length
+		try {
+			MessageDigest md = MessageDigest.getInstance("MD5");
+			digestlen = md.getDigestLength();
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}
 		
-		return digestlen*8;
+		return digestlen/8;
 	}
 	
 	public static String toHex(byte[] digest) {

@@ -24,15 +24,17 @@ import org.apache.logging.log4j.Logger;
 import no.hvl.dat110.middleware.Message;
 import no.hvl.dat110.rpc.interfaces.NodeInterface;
 
+import static no.hvl.dat110.util.Hash.hashOf;
+
 public class FileManager {
 	
 	private static final Logger logger = LogManager.getLogger(FileManager.class);
 	
-	private BigInteger[] replicafiles;							// array stores replicated files for distribution to matching nodes
-	private int numReplicas;									// let's assume each node manages nfiles (5 for now) - can be changed from the constructor
+	private BigInteger[] replicafiles;// array stores replicated files for distribution to matching nodes
+	private int numReplicas;// let's assume each node manages nfiles (5 for now) - can be changed from the constructor
 	private NodeInterface chordnode;
-	private String filepath; 									// absolute filepath
-	private String filename;									// only filename without path and extension
+	private String filepath;// absolute filepath
+	private String filename;// only filename without path and extension
 	private BigInteger hash;
 	private byte[] bytesOfFile;
 	private String sizeOfByte;
@@ -59,12 +61,17 @@ public class FileManager {
 	public void createReplicaFiles() {
 	 	
 		// set a loop where size = numReplicas
-		
 		// replicate by adding the index to filename
-		
 		// hash the replica
-		
 		// store the hash in the replicafiles array.
+		try {
+			for(int i=0; i<numReplicas; i++) {
+				String replica = filename + i;
+				replicafiles[i] = hashOf(replica);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
     /**
@@ -81,22 +88,16 @@ public class FileManager {
     	int counter = 0;
 	
     	// Task1: Given a filename, make replicas and distribute them to all active peers such that: pred < replica <= peer
-    	
     	// Task2: assign a replica as the primary for this file. Hint, see the slide (project 3) on Canvas
-    	
     	// create replicas of the filename
-    	
 		// iterate over the replicas
-    	
     	// for each replica, find its successor (peer/node) by performing findSuccessor(replica)
-    	
     	// call the addKey on the successor and add the replica
-		
 		// implement a logic to decide if this successor should be assigned as the primary for the file
-    	
     	// call the saveFileContent() on the successor and set isPrimary=true if logic above is true otherwise set isPrimary=false
-    	
     	// increment counter
+
+
 		return counter;
     }
 	
@@ -163,7 +164,7 @@ public class FileManager {
 		
 		//set the values
 		filename = f.getName().replace(".txt", "");		
-		hash = Hash.hashOf(filename);
+		hash = hashOf(filename);
 		this.bytesOfFile = bytesOfFile;
 		double size = (double) bytesOfFile.length/1000;
 		NumberFormat nf = new DecimalFormat();

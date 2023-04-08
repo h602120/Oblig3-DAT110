@@ -155,21 +155,14 @@ public class ChordProtocols {
 		
 		try {
 			logger.info("Fixing the FingerTable for the Node: "+ chordnode.getNodeName());
-	
+			//TODO:
 			// get the finger table from the chordnode (list object)
-			
 			// ensure to clear the current finger table
-			
 			// get the address size from the Hash class. This is the modulus and our address space (2^mbit = modulus)
-			
 			// get the number of bits from the Hash class. Number of bits = size of the finger table
-			
-			// iterate over the number of bits			
-			
+			// iterate over the number of bits
 			// compute: k = succ(n + 2^(i)) mod 2^mbit
-			
 			// then: use chordnode to find the successor of k. (i.e., succnode = chordnode.findSuccessor(k))
-			
 			// check that succnode is not null, then add it to the finger table
 
 		} catch (RemoteException e) {
