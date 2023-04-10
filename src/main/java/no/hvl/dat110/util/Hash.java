@@ -28,14 +28,21 @@ public class Hash {
 		return the BigInteger
 		 */
 //		Task: Hash a given string using MD5 and return the result as a BigInteger
+//		MessageDigest md = null;
 		try {
 			MessageDigest md = MessageDigest.getInstance("MD5");
 			byte[] digest = md.digest(entity.getBytes(StandardCharsets.UTF_8));
 			String hex = toHex(digest);
 			hashint = new BigInteger(hex, 16);
+//			md = MessageDigest.getInstance("MD5");
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
 		}
+//		md.update(entity.getBytes());
+//		byte[] digest = md.digest();
+//		String hex = toHex(digest);
+//		hashint = new BigInteger(hex, 16);
+//
 
 		return hashint;
 	}
@@ -46,6 +53,7 @@ public class Hash {
 		// compute the number of bits = bitSize()
 		// compute the address size = 2 ^ number of bits
 		// return the address size
+
 		try {
 			MessageDigest md = MessageDigest.getInstance("MD5");
 			int digestlen = md.getDigestLength();
@@ -54,7 +62,7 @@ public class Hash {
 			e.printStackTrace();
 		}
 
-		
+
 		return null;
 	}
 	
@@ -70,7 +78,7 @@ public class Hash {
 			e.printStackTrace();
 		}
 		
-		return digestlen/8;
+		return digestlen*8;
 	}
 	
 	public static String toHex(byte[] digest) {
